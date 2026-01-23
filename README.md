@@ -2,6 +2,36 @@
 
 Runtime macros for cheat-aware error handling. Forces developers to document how code could be "cheated" (made to falsely pass) and what users would experience if it were.
 
+## Status
+
+| Metric | Value |
+|--------|-------|
+| Stage | Beta |
+| Target | Rust (any platform) |
+| Last verified | 2026-01-23 |
+
+### Works
+
+- `cheat_bail!` and `cheat_ensure!` macros
+- Structured error output with cheat vectors
+- Re-exports of cheat-test proc-macros
+
+### Known Issues
+
+- See parent repo issues
+
+---
+
+## Author
+
+<!-- HUMAN WRITTEN - DO NOT MODIFY -->
+
+[Waiting for human input]
+
+<!-- END HUMAN WRITTEN -->
+
+---
+
 Based on [Anthropic's research on emergent misalignment](https://www.anthropic.com/research/emergent-misalignment-reward-hacking).
 
 ## Why This Exists

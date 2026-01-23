@@ -9,4 +9,4 @@ license = "MIT"
 anyhow = "1.0"
 
 # Re-export proc-macros from cheat-test
-cheat-test = { git = "https://github.com/LevitateOS/cheat-test.git", branch = "master" }
+cheat-test = "0.1"

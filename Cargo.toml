@@ -13,5 +13,4 @@ categories = ["development-tools::testing"]
 anyhow = "1.0"
 
 # Re-export proc-macros from leviso-cheat-test
-# Uses path for local dev, version for crates.io publishing
-leviso-cheat-test = { version = "0.1", path = "../cheat-test" }
+leviso-cheat-test = "0.1"

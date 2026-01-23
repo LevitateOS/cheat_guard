@@ -232,7 +232,6 @@ impl CheckResult {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use anyhow::Result;
 
     #[test]
@@ -256,7 +255,8 @@ mod tests {
                 severity = "CRITICAL",
                 cheats = ["Cheat 1", "Cheat 2"],
                 consequence = "Bad things happen",
-                "Error: {} not found", "thing"
+                "Error: {} not found",
+                "thing"
             );
         })();
 

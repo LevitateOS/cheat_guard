@@ -1,4 +1,4 @@
-//! # cheat-guard
+//! # leviso-cheat-guard
 //!
 //! Runtime macros for cheat-aware error handling in non-test contexts.
 //!
@@ -7,7 +7,7 @@
 //!
 //! ## Why This Exists
 //!
-//! The `cheat-test` crate provides proc-macro attributes for `#[test]` functions.
+//! The `leviso-cheat-test` crate provides proc-macro attributes for `#[test]` functions.
 //! But install-tests uses a custom `Step` trait, not standard tests. This crate
 //! provides macros that can be used inside any function to document cheat vectors
 //! and fail with informative messages.
@@ -21,7 +21,7 @@
 //! ## Example
 //!
 //! ```rust,ignore
-//! use cheat_guard::cheat_bail;
+//! use leviso_cheat_guard::cheat_bail;
 //!
 //! fn partition_disk(console: &mut Console) -> Result<()> {
 //!     let output = console.exec("sfdisk /dev/vda", timeout)?;
@@ -41,7 +41,7 @@
 //! ```
 
 // Re-export proc-macros for convenience
-pub use cheat_test::{cheat_aware, cheat_canary, cheat_reviewed};
+pub use leviso_cheat_test::{cheat_aware, cheat_canary, cheat_reviewed};
 
 /// Bail with cheat-aware error message.
 ///

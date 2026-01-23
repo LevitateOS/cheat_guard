@@ -38,7 +38,9 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock', '**/Cargo.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Run tests
         run: cargo test --verbose
       - name: Verify library builds
@@ -84,7 +86,7 @@ jobs:
     name: Release
     needs: [test, clippy, fmt, msrv]
     if: |
-      (github.event_name == 'push' && github.ref == 'refs/heads/master' && !startsWith(github.event.head_commit.message, 'chore: Bump version')) ||
+      (github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && !startsWith(github.event.head_commit.message, 'chore: Bump version')) ||
       github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
@@ -123,7 +125,8 @@ jobs:
         run: cargo check
       - name: Commit version bump
         run: |
-          git add Cargo.toml Cargo.lock
+          git add Cargo.toml
+          git add Cargo.lock 2>/dev/null || true  # May not exist for libraries
           git commit -m "chore: Bump version to ${{ steps.bump.outputs.version }}"
           git push
       - name: Create and push tag

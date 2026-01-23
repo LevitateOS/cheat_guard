@@ -2,8 +2,12 @@
 name = "cheat-guard"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.74"
 description = "Runtime macros for cheat-aware error handling (bail, ensure, check)"
 license = "MIT"
+repository = "https://github.com/LevitateOS/cheat-guard"
+keywords = ["testing", "error-handling", "macros"]
+categories = ["development-tools::testing"]
 
 [dependencies]
 anyhow = "1.0"

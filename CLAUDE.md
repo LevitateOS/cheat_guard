@@ -1,49 +1,44 @@
-# CLAUDE.md - Cheat Guard
-
-## STOP. READ. THEN ACT.
-
-Before modifying this crate, read `src/lib.rs` to understand how the macros work.
-
----
+# CLAUDE.md - cheat-guard
 
 ## What is cheat-guard?
 
-Runtime macros for cheat-aware error handling. Provides `cheat_bail!` and `cheat_ensure!` - like `anyhow::bail!` and `anyhow::ensure!` but with documented cheat vectors.
+Runtime macros for cheat-aware error handling. Provides `cheat_bail!` and `cheat_ensure!` with documented cheat vectors.
 
-Based on [Anthropic's emergent misalignment research](https://www.anthropic.com/research/emergent-misalignment-reward-hacking).
+Based on [Anthropic's Reward Hacking Research](https://www.anthropic.com/research/emergent-misalignment-reward-hacking).
 
-## Development
+## What Belongs Here
+
+- `macro_rules!` macros for runtime checks
+- Re-exports of proc-macros from `cheat-test`
+
+## What Does NOT Belong Here
+
+| Don't put here | Put it in |
+|----------------|-----------|
+| Proc-macros | `testing/cheat-test/` |
+| Actual tests | `testing/install-tests/` or `testing/rootfs-tests/` |
+
+## Commands
 
 ```bash
 cargo build
 cargo test
-cargo clippy
 ```
 
-## Key Rules
-
-1. **Don't weaken error messages** - The verbose output is intentional
-2. **Don't remove cheat metadata fields** - Every field exists for a reason
-3. **Don't simplify the macro syntax** - Forcing explicit documentation prevents shortcuts
-
-## The Macros
+## Macros
 
 | Macro | Purpose |
 |-------|---------|
-| `cheat_bail!` | Bail with cheat documentation (like `bail!()`) |
-| `cheat_ensure!` | Ensure condition with cheat documentation (like `ensure!()`) |
-| `cheat_check!` | Add check to StepResult with cheat metadata |
+| `cheat_bail!` | Like `bail!()` with cheat documentation |
+| `cheat_ensure!` | Like `ensure!()` with cheat documentation |
+| `cheat_check!` | Add check to StepResult with metadata |
 
-## Re-exports
+## Re-exports from cheat-test
 
-This crate re-exports proc-macros from `cheat-test`:
-- `#[cheat_aware]` - For `#[test]` functions
-- `#[cheat_reviewed]` - Mark test as reviewed
+- `#[cheat_aware]` - For test functions
+- `#[cheat_reviewed]` - Mark as reviewed
 - `#[cheat_canary]` - Honeypot tests
 
 ## Why Two Crates?
 
-- `cheat-test` - Proc-macro crate (can only export proc-macros)
-- `cheat-guard` - Regular crate with `macro_rules!` macros + re-exports
-
-Proc-macro crates have restrictions that prevent mixing with regular macros.
+Proc-macro crates can only export proc-macros. `cheat-guard` wraps them with `macro_rules!` macros.
